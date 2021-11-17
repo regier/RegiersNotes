@@ -22,3 +22,11 @@ system_default = ssl_default_sect
 MinProtocol = TLSv1.2
 CipherString = DEFAULT:@SECLEVEL=1
 ```
+## Seting up SSH VPN Server-side
+```
+echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables -I FORWARD -i tun+ -j ACCEPT
+iptables -I FORWARD -o tun+ -j ACCEPT
+iptables -I INPUT -i tun+ -j ACCEPT
+iptables -t nat -I POSTROUTING -o EXTERNAL_INTERFACE -j MASQUERADE
+```

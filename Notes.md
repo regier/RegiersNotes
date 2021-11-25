@@ -6,9 +6,11 @@ A collection of notes and snippets
 ### When servers use a TLS/SSL cypher that is too simple.
 
 #### Error message.
+
 `tls_process_ske_dhe:dh key too small`
 
 #### Workaround
+
 The workaround for this issue is to make your SSL accept less secure cyphers.
 
 Edit the file `/etc/ssl/openssl.cnf` as root. Change it to match the lines below.
@@ -22,11 +24,36 @@ system_default = ssl_default_sect
 MinProtocol = TLSv1.2
 CipherString = DEFAULT:@SECLEVEL=1
 ```
+
 ## Seting up SSH VPN Server-side
-```
+
+```bash
 echo 1 > /proc/sys/net/ipv4/ip_forward
 iptables -I FORWARD -i tun+ -j ACCEPT
 iptables -I FORWARD -o tun+ -j ACCEPT
 iptables -I INPUT -i tun+ -j ACCEPT
 iptables -t nat -I POSTROUTING -o EXTERNAL_INTERFACE -j MASQUERADE
+```
+
+## Making RAID 0/1 on Debian
+
+### 1. Install mdadm
+
+```bash
+apt-get install mdadm
+update-initramfs -u
+```
+
+### 2. Adding sda and sdb devices as RAID members and setting RAID 1 in them,
+
+```bash
+mdadm --zero-superblock /dev/sda /dev/sdc
+mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sda /dev/sdc
+mdadm --detail --scan /dev/md0 >> /etc/mdadm/mdadm.conf
+```
+
+### 3. Making an XFS filesystem in the new RAID device.
+
+```bash
+mkfs.xfs -L Raid1 /dev/md0
 ```

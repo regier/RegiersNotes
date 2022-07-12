@@ -3,8 +3,20 @@ A collection of notes and snippets
 
 ## Install full dependencies for NextCloud on Debian
 
+### Required Packages
+
 ```
-apt install default-mysql-server default-mysql-client apache2 php-curl php-fdomdocument php-gd php-json php-xml php-xmlrpc php-zip php-bz2 php-mysql php-imap php-intl php-ldap php-bcmath php-fpm php-gmp php-imagick libmagickcore-6.q16-6-extra php-apcu ffmpeg
+apt install default-mysql-server default-mysql-client apache2 php-curl php-fdomdocument php-gd php-json php-xml php-xmlrpc php-zip php-bz2 php-mysql php-imap php-intl php-ldap php-bcmath php-fpm php-gmp php-imagick libmagickcore-6.q16-6-extra php-apcu php-mbstring ffmpeg 
+```
+
+### Enabling Required Apache Modules
+```
+a2enmod rewrite
+a2enmod headers
+a2enmod env
+a2enmod dir
+a2enmod mime
+systemctl restart apache2
 ```
 
 ## Sharing Internet on Linux

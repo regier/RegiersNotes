@@ -1,6 +1,34 @@
 # Notes
 A collection of notes and snippets
 
+## Sharing Internet on Linux
+
+### Internet Forwarding
+
+1. Uncomment `#net.ipv4.ip_forward=1` in the file `/etc/sysctl.conf`
+2. Enable ipv4 forwarding without having to reboot. `echo "1" > /proc/sys/net/ipv4/ip_forward`
+3. Enable forwarding with `iptables` with the command `interface=enp0d1 iptables -t nat -A POSTROUTING -o $interface -j MASQUERADE`
+4. Save `iptables` rule so it can persist when the system is rebooted. `iptables-save | tee /etc/iptables.conf`
+
+### DHCP Server
+
+1. You can use a `dnsmasq` as a dhcp server, simply install it and uncomment dhcp range.
+2. Restart `dnsmasq` with the command `systemctl restart dnsmasq`
+
+## Debian Linux simple internet configuration
+
+`/etc/network/interfaces`
+
+1. Replace `eth0` with `enp0s1` for example. Omit address and gateway, set `inet dhcp` for dhcp.
+2. Adjust `address` and `gateway` according to your configuration.
+
+```
+auto eth0
+iface eth0 inet static
+  address 192.0.2.7/24
+  gateway 192.0.2.254
+```
+
 ## Fix for common issues
 
 ### When servers use a TLS/SSL cypher that is too simple.

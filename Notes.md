@@ -117,3 +117,29 @@ The following arguments enable a fully accelerated display on QEMU.
 To make QEMU use full hardware virtualization and use all your CPU cores use the following aruments.
 
 `-smp $(nproc) -enable-kvm -cpu host`
+
+## Ext4 and F2FS Filesystem Level Encryption
+
+### Enabling Encryption
+
+#### Create new FS
+
+* F2FS `mkfs.f2fs -O encrypt /dev/sdX`
+* Ext4 `mkfs.ext4 -O encrypt /dev/sdX`
+
+#### Or Enable for existing FS
+
+* F2FS `fsck.f2fs -O encrypt /dev/sdX`
+* Ext4 `tune2fs -O encrypt /dev/sdX`
+
+#### Configure Encryption For a Directory
+
+* `# fscrypt setup`
+* `#/$ fscrypt setup /path/mountpoint`
+
+* `$ fscrypt encrypt /path/mountpoint/directory`
+
+#### Lock/Unlock Dir
+
+* `$ fscrypt unlock fscrypt unlock`
+* `$ fscrypt lock fscrypt unlock`

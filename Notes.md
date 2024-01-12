@@ -1,15 +1,49 @@
 # Notes
 A collection of notes and snippets
 
+## Auto Scaling/Adjusting Resolution KVM Virtio Virtual Machine Window
+
+In virt-manager using spice
+
+### Required Packages (Guest)
+
+- [Spice VDA Agent/Spice Guest Tools](https://www.spice-space.org/download.html#guest)
+
+#### Linux
+
+```
+spice-vdagent
+```
+
+#### Windows
+
+```
+spice-guest-tools
+```
+
+### Automatically Setting Resolution
+
+- Note: Works better/Only works with X11.
+
+```
+xrandr --output Virtual-1 --auto
+```
+
 ## Install full dependencies for NextCloud on Debian
 
 ### Required Packages
+
+- NextCloud Official Doc [Prerequisites](https://docs.nextcloud.com/server/latest/admin_manual/installation/source_installation.html#prerequisites-for-manual-installation)
+- NextCloud Official Doc [Required PHP Modules](https://docs.nextcloud.com/server/latest/admin_manual/installation/php_configuration.html)
 
 ```
 apt install default-mysql-server default-mysql-client apache2 php-curl php-fdomdocument php-gd php-json php-xml php-xmlrpc php-zip php-bz2 php-mysql php-imap php-intl php-ldap php-bcmath php-fpm php-gmp php-imagick libmagickcore-6.q16-6-extra php-apcu php-mbstring ffmpeg 
 ```
 
 ### Enabling Required Apache Modules
+
+- NextCloud Official Doc [Apache Configuration](https://docs.nextcloud.com/server/latest/admin_manual/installation/source_installation.html#apache-configuration-label)
+
 ```
 a2enmod rewrite
 a2enmod headers

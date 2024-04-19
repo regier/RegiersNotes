@@ -181,7 +181,7 @@ mkfs.xfs -L Raid1 /dev/md0
 
 The following arguments enable a fully accelerated display on QEMU.
 
-`-device virtio-vga,virgl=on -display gtk,gl=on`
+`-device virtio-vga-gl -display gtk,gl=on`
 
 ### Enable Full Virtualzation and SMP.
 

@@ -1,6 +1,43 @@
 # Notes
 A collection of notes and snippets
 
+## Terminal Manipulation
+
+### Escape Sequences
+
+To be used with `printf` or `echo -e` for example.
+
+```sh
+# Show the terminal cursor             = \033[?25h
+# Hide the terminal cursor             = \033[?25l
+# Repeat a character n times           = seq 1 n
+# Save current cursor position         = \033[s
+# Restore previous cursor position     = \033[u
+# Move cursor to the specified coords  = \033[1;1H
+# Carriage Return                      = \r
+# Return cursor to the home position   = \033[H
+# Clear line                           = \033[K
+# Clear screen                         = \033[J
+```
+
+### Terminal Parameters
+
+Consulting terminal capabilities and status.
+
+```sh
+echo "Terminal type and supported colours: ${TERM}."
+echo "Current terminal size is Columns x Lines: ${COLUMNS}x${LINES}."
+```
+
+If for some reason the variables $COLUMNS and $LINES are not available, then the following could be tried.
+
+Assuming you have the `stty` command available.
+
+```sh
+COLUMNS="$(stty size | cut -d ' ' -f 2)"
+LINES=$(stty size | cut -d ' ' -f 1)
+```
+
 ## Auto Scaling/Adjusting Resolution KVM Virtio Virtual Machine Window
 
 In virt-manager using spice

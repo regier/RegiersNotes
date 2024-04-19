@@ -1,5 +1,5 @@
-# Notes
-A collection of notes and snippets
+# Regier's Notes
+Just a collection of notes of things I find interesting, code snippets, instructions, usefull commands or things I need to remember for later.
 
 ## Terminal Manipulation
 

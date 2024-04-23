@@ -1,6 +1,70 @@
 # Regier's Notes
 Just a collection of notes of things I find interesting, code snippets, instructions, usefull commands or things I need to remember for later.
 
+## Patterns
+
+### Some notes and examples about patterns
+
+#### Use this OR that. And only this or that.
+
+* `^` - Start of a string.
+* `$` - End of a string.
+* `(` - Start of a capturing group.
+* `)` - End of a capturing group. 
+* `|` - OR operator.
+
+##### Example
+
+```sh
+#!/bin/bash
+
+# greeter.sh
+# A greeter.
+
+print() { printf '%s\n' "${*}"; }                     # A Modular Printer.
+
+# User Greeter Function.
+greeter() {
+
+  local input_string="${*}"                           # Captures the arguments in the "input_string" variable.
+
+  # Makes sure something was given as input.
+  if [[ -z "${input_string}" ]]; then
+    print "Please greet me something."
+    return 1
+  fi
+
+  # Makes sure either 'hello' OR 'bye' is used.
+  if [[ ! "${input_string}" =~ ^(hello|bye)$ ]]; then
+    print "Please use either \"hello\" OR \"bye\"."   # Prints error message if neither is passed.
+    return 3                                          # Exits function with return status 1.
+  fi
+
+  # Responds to 'hello' and 'bye'.
+  if [[ "${input_string}" == "hello" ]]; then
+    print "Hi there!"
+  else
+    print "Cya!"
+  fi
+
+  return 0                                            # Clean exit.
+}
+
+greeter "${*}"
+
+```
+```text
+[ 0] $: ./greeter.sh
+Please greet me with something.
+[ 1] $: ./greeter.sh hi
+Please use either "hello" OR "bye".
+[ 3] $: ./greeter.sh hello
+Hi there!
+[ 0] $: ./greeter.sh bye
+Cya!
+[ 0] $:
+```
+
 ## Terminal Manipulation
 
 ### Escape Sequences
